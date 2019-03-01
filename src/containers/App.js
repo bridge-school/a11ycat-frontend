@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { SelectAction } from '../components/views/SelectAction';
+import { Provider } from 'react-redux';
+import { Store } from '../store';
+import Main from '../components/Main';
 import './App.css';
 import { Header, Footer } from '../components/HeaderFooter';
 
 class App extends Component {
   render() {
     return (
+      <Provider store={Store}>
       <div className="App">
         <Header />
-        <SelectAction />
+        <Main />
         <Footer />
       </div>
+      </Provider>
     );
   }
 }
 
-const mapStateToProps = store => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
