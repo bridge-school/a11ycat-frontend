@@ -6,7 +6,7 @@ export const Header = (props) =>
       style={{height: 40}}
       alt="catcall.io logo"></img>
     <span>catcall.io</span>
-    <a href="#" onClick={() => {
+    <a href="/" onClick={() => {
       console.log("set visibility of components")
     }}>home</a>
   </header>
