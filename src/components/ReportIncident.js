@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import RadioScale from "./RadioScale";
 
 class ReportIncident extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selectedInput: "",
       inputOptions: [
@@ -32,7 +32,7 @@ class ReportIncident extends Component {
     };
   }
   handleRadioInputChange = e => {
-    this.setState({ inputScaleRating: e.target.value });
+    this.setState({ selectedInput: e.target.value });
   };
 
   render() {
