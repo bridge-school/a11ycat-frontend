@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from "react";
+import { connect } from "react-redux";
 import { SelectAction } from './views/SelectAction';
-import { connect } from 'react-redux';
 
-class Main extends Component {
+const Main = {
   render() {
     return (
       <div className="App">
@@ -12,8 +12,11 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = store => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);

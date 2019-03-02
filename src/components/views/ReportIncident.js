@@ -1,7 +1,1 @@
-import React from 'react';
-
-export const ReportIncident = props => (
-  <div>
-
-  </div>
-);
+export const ReportIncident = () => <div />;
