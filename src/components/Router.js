@@ -8,7 +8,7 @@ import { SelectAction } from './views/SelectAction';
 import { ReportIncident } from './views/ReportIncident';
 import { ViewReports } from './views/ViewReports';
 
-class Main extends Component {
+class Router extends Component {
   render() {
     return (
       <div className="App">
@@ -28,4 +28,4 @@ const mapStateToProps = store => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Router);
