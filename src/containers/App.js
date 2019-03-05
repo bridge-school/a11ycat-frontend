@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import Main from '../components/Main';
@@ -10,6 +11,7 @@ const store = configureStore()
 class App extends Component {
   render() {
     return (
+
       <Provider store={store}>
         <div className="App">
           <Header />
