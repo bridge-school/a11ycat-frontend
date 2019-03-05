@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import Main from '../components/Main';
+import Router from '../components/Router';
 import './App.css';
 import { Header, Footer } from '../components/HeaderFooter';
 import configureStore from '../store';
@@ -13,7 +13,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <Header />
-          <Main />
+          <Router />
           <Footer />
         </div>
       </Provider>
