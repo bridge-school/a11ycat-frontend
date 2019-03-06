@@ -12,11 +12,7 @@ const Router = () => (
   <ConnectedRouter history={history} className="App">
     <Switch>
       <Route exact path="/" render={() => <SelectAction />} />
-      <Route
-        exact
-        path="/report-incident"
-        render={() => <ReportIncident />}
-      />
+      <Route exact path="/report-incident" render={() => <ReportIncident />} />
       <Route exact path="/view-reports" render={() => <ViewReports />} />
     </Switch>
   </ConnectedRouter>
