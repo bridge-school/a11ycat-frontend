@@ -31,8 +31,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run lint",
-      "pre-push": "npm run format && npm run lint"
+      "pre-commit": "yarn format && yarn lint",
+      "pre-push": "yarn format && yarn lint"
     }
   },
   "browserslist": [
