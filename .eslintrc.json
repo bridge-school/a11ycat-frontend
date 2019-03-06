@@ -22,5 +22,10 @@
   "rules": {
     "import/prefer-default-export": "off",
     "react/prop-types": [0]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

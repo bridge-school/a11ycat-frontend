@@ -31,10 +31,10 @@ export class ReportIncident extends Component {
       ]
     };
   }
-  
-  handleRadioInputChange (e) {
+
+  handleRadioInputChange(e) {
     this.setState({ selectedInput: e.target.value });
-  };
+  }
 
   render() {
     return (
