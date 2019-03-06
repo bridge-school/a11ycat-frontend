@@ -5,7 +5,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../store";
 
 import { SelectAction } from "./views/SelectAction";
-import { ReportIncident } from "./views/ReportIncident";
+import ReportIncident from "./views/ReportIncident";
 import { ViewReports } from "./views/ViewReports";
 
 const Router = () => (
