@@ -9,19 +9,17 @@ import { ReportIncident } from "./views/ReportIncident";
 import { ViewReports } from "./views/ViewReports";
 
 const Router = () => (
-  <div className="App">
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route exact path="/" render={() => <SelectAction />} />
-        <Route
-          exact
-          path="/report-incident"
-          render={() => <ReportIncident />}
-        />
-        <Route exact path="/view-reports" render={() => <ViewReports />} />
-      </Switch>
-    </ConnectedRouter>
-  </div>
+  <ConnectedRouter history={history} className="App">
+    <Switch>
+      <Route exact path="/" render={() => <SelectAction />} />
+      <Route
+        exact
+        path="/report-incident"
+        render={() => <ReportIncident />}
+      />
+      <Route exact path="/view-reports" render={() => <ViewReports />} />
+    </Switch>
+  </ConnectedRouter>
 );
 
 const mapStateToProps = () => ({});
