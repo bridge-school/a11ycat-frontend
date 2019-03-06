@@ -1,7 +1,7 @@
 import React from "react";
 
-export const Button = props => (
+export const Button = ({ text }) => (
   <button className="button" type="button">
-    {props.text}
+    {text}
   </button>
 );

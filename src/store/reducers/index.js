@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import map from './mapReducer';
+import { connectRouter } from "connected-react-router";
 
-export const rootReducer = combineReducers({
-  map,
-});
+export default history =>
+  combineReducers({
+    router: connectRouter(history)
+  });

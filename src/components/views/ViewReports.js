@@ -1,3 +1,3 @@
 import React from "react";
 
-export const ViewReports = props => <div />;
+export const ViewReports = () => <div />;

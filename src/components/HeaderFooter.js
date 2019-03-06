@@ -3,17 +3,9 @@ import logo from "../CatCallLogo.png";
 
 export const Header = () => (
   <header>
-    <img
-      src={logo}
-      style={{ height: 40 }}
-      alt="catcall.io logo"
-    />
+    <img src={logo} style={{ height: 40 }} alt="catcall.io logo" />
     <span>catcall.io</span>
-    <a
-      href="/"
-      onClick={() => {
-      }}
-    >
+    <a href="/" onClick={() => {}}>
       home
     </a>
   </header>

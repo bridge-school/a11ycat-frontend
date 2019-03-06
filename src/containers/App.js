@@ -1,20 +1,18 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { Store } from "../store";
-import Main from "../components/Main";
+import Router from "../components/Router";
 import "./App.css";
 import { Header, Footer } from "../components/HeaderFooter";
+import configureStore from "../store";
 
-export const App = {
-  render() {
-    return (
-      <Provider store={Store}>
-        <div className="App">
-          <Header />
-          <Main />
-          <Footer />
-        </div>
-      </Provider>
-    );
-  }
-}
+const store = configureStore();
+
+export const App = () => (
+  <Provider store={store}>
+    <div className="App">
+      <Header />
+      <Router />
+      <Footer />
+    </div>
+  </Provider>
+);
