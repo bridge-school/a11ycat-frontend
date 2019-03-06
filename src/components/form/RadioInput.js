@@ -7,7 +7,7 @@ const RadioInput = ({
   selectedInput
 }) => {
   return (
-    <React.Fragment>
+    <>
       <label htmlFor={inputRating}>
         <span role="img" aria-label={inputRating}>
           {displayEmoji}
@@ -21,7 +21,7 @@ const RadioInput = ({
         checked={inputRating === selectedInput}
         onChange={handleChange}
       />
-    </React.Fragment>
+    </>
   );
 };
 
