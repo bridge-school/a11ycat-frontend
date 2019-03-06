@@ -30,6 +30,8 @@ export class ReportIncident extends Component {
         }
       ]
     };
+
+    this.handleRadioInputChange = this.handleRadioInputChange.bind(this);
   }
 
   handleRadioInputChange(e) {
