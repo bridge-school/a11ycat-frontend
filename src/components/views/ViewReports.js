@@ -1,7 +1,3 @@
-import React from 'react';
+import React from "react";
 
-export const ViewReports = props => (
-  <div>
-
-  </div>
-);
+export const ViewReports = () => <div />;
