@@ -14,7 +14,7 @@ class Map extends React.Component {
 
   render() {
     // TO DO: remove useThis variable
-    const useThis = this.state.lat
+    const useThis = this.state.lat;
 
     return <div>Loading map... {useThis}</div>;
   }

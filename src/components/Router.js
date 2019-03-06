@@ -8,7 +8,7 @@ import { SelectAction } from "./views/SelectAction";
 import { ReportIncident } from "./views/ReportIncident";
 import { ViewReports } from "./views/ViewReports";
 
-const Router = () =>
+const Router = () => (
   <div className="App">
     <ConnectedRouter history={history}>
       <Switch>
@@ -22,6 +22,7 @@ const Router = () =>
       </Switch>
     </ConnectedRouter>
   </div>
+);
 
 const mapStateToProps = () => ({});
 
