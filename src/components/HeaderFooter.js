@@ -1,17 +1,14 @@
-import React from "react"
+import React from "react";
+import logo from "../CatCallLogo.png";
 
-export const Header = (props) =>
+export const Header = () => (
   <header>
-    <img src={require('../CatCallLogo.png')}
-      style={{height: 40}}
-      alt="catcall.io logo"></img>
+    <img src={logo} style={{ height: 40 }} alt="catcall.io logo" />
     <span>catcall.io</span>
-    <a href="/" onClick={() => {
-      console.log("set visibility of components")
-    }}>home</a>
+    <a href="/" onClick={() => {}}>
+      home
+    </a>
   </header>
+);
 
-
-export const Footer = () =>
-  <footer>
-  </footer>
+export const Footer = () => <footer />;

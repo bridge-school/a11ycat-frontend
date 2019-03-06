@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "globals": {
+    "React": true
+  },
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/prop-types": [0]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

@@ -1,32 +1,23 @@
-import React from 'react';
+import React from "react";
 
 class Map extends React.Component {
-    constructor(props) {
-        super(props);
-        const { lat, lng } = this.props.initialCenter; // this will be provided by the browser's location 
-        this.state = {
-            currentLocation: {
-                lat: lat,
-                lng: lng
-            }
-        }
-    }
+  constructor(props) {
+    super(props);
+    const { lat, lng } = this.props.initialCenter; // this will be provided by the browser's location
+    this.state = {
+      currentLocation: {
+        lat,
+        lng
+      }
+    };
+  }
 
+  render() {
+    // TO DO: remove useThis variable
+    const useThis = this.state.lat;
 
-    render() {
-        return (
-            <div>
-                Loading map...
-            </div>
-
-        )
-    }
-
-
+    return <div>Loading map... {useThis}</div>;
+  }
 }
-
-
-
-
 
 export default Map;

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button } from '../Button';
+import React from "react";
+import { Button } from "../Button";
 
-export const SelectAction = props => (
+export const SelectAction = () => (
   <div>
-    <Button text={"Report Incident"}/>
-    <Button text={"View Reports"}/>
+    <Button text={"Report Incident"} />
+    <Button text={"View Reports"} />
   </div>
 );
