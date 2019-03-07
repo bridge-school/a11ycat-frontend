@@ -1,4 +1,0 @@
-// MAP
-export const MAP_FETCH_SUCCESS = "MAP_FETCH_SUCCESS";
-export const MAP_FETCH_FAILURE = "MAP_FETCH_FAILRUE";
-export const MAP_IS_LOADING = "MAP_IS_LOADING";
