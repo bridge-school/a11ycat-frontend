@@ -41,7 +41,7 @@ export class ReportIncident extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <form action="submit">
           {/* INSERT MAP HERE */}
           {/* INSERT TEXTFIELD HERE */}
@@ -57,7 +57,7 @@ export class ReportIncident extends Component {
         <Link to="/view-reports">
           <Button text={"Cancel"} />
         </Link>
-      </>
+      </div>
     );
   }
 }
