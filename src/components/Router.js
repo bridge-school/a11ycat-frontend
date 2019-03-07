@@ -2,11 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
-
-import { SelectAction } from "./views/SelectAction";
-import { ReportIncident } from "./views/ReportIncident";
-import { ViewReports } from "./views/ViewReports";
-import { NotFound } from "./views/NotFound";
+import { SelectAction, ReportIncident, ViewReports, NotFound } from "./views";
 
 const Router = ({ history }) => (
   <ConnectedRouter history={history} className="App">

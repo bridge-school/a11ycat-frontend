@@ -1,6 +1,6 @@
 import React from "react";
 
-const RadioInput = ({
+export const RadioInput = ({
   displayEmoji,
   inputRating,
   handleChange,
@@ -24,5 +24,3 @@ const RadioInput = ({
     </>
   );
 };
-
-export default RadioInput;

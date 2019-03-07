@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import RadioScale from "../form/RadioScale";
+import { RadioScale } from "../form/RadioScale";
 import { Button } from "../Button";
 
 export class ReportIncident extends Component {
