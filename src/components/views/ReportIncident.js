@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import RadioScale from "../form/RadioScale";
+import { Button } from "../Button";
 
 export class ReportIncident extends Component {
   constructor(props) {
@@ -40,18 +41,23 @@ export class ReportIncident extends Component {
 
   render() {
     return (
-      <form action="submit">
-        {/* INSERT MAP HERE */}
-        {/* INSERT TEXTFIELD HERE */}
-        <h3>Please state how you felt when the incident happened </h3>
-        <RadioScale
-          selectedInput={this.state.selectedInput}
-          inputOptions={this.state.inputOptions}
-          handleRadioInputChange={this.handleRadioInputChange}
-        />
+      <>
+        <form action="submit">
+          {/* INSERT MAP HERE */}
+          {/* INSERT TEXTFIELD HERE */}
+          <h3>Please state how you felt when the incident happened </h3>
+          <RadioScale
+            selectedInput={this.state.selectedInput}
+            inputOptions={this.state.inputOptions}
+            handleRadioInputChange={this.handleRadioInputChange}
+          />
 
-        <button type="submit">Submit Report</button>
-      </form>
+          <button type="submit">Submit Report</button>
+        </form>
+        <Link to="/view-reports">
+          <Button text={"Cancel"} />
+        </Link>
+      </>
     );
   }
 }
