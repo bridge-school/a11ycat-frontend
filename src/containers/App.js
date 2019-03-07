@@ -1,38 +1,18 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import { Provider } from 'react-redux';
-// import { Store } from '../store';
+import React from "react";
+import { Provider } from "react-redux";
+import Router from "../components/Router";
+import "./App.css";
+import { Header, Footer } from "../components/HeaderFooter";
+import configureStore, { history } from "../store";
 
-import logo from '../logo.svg';
-import './App.css';
+const store = configureStore();
 
-class App extends Component {
-  render() {
-    return (
-      // <Provider store={Store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
-      // </Provider>
-    );
-  }
-}
-
-const mapStateToProps = store => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export const App = () => (
+  <Provider store={store}>
+    <div className="App">
+      <Header />
+      <Router history={history} />
+      <Footer />
+    </div>
+  </Provider>
+);
