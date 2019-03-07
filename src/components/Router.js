@@ -6,6 +6,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { SelectAction } from "./views/SelectAction";
 import { ReportIncident } from "./views/ReportIncident";
 import { ViewReports } from "./views/ViewReports";
+import { NotFound } from "./views/NotFound";
 
 const Router = ({ history }) => (
   <ConnectedRouter history={history} className="App">
@@ -13,6 +14,7 @@ const Router = ({ history }) => (
       <Route exact path="/" component={SelectAction} />
       <Route exact path="/report-incident" component={ReportIncident} />
       <Route exact path="/view-reports" component={ViewReports} />
+      <Route component={NotFound} />
     </Switch>
   </ConnectedRouter>
 );
