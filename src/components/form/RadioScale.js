@@ -1,8 +1,12 @@
 import React from "react";
 
-import RadioInput from "./RadioInput";
+import { RadioInput } from "./RadioInput";
 
-const RadioScale = ({ inputOptions, selectedInput, handleRadioInputChange }) =>
+export const RadioScale = ({
+  inputOptions,
+  selectedInput,
+  handleRadioInputChange
+}) =>
   inputOptions.map(input => {
     return (
       <RadioInput
@@ -14,5 +18,3 @@ const RadioScale = ({ inputOptions, selectedInput, handleRadioInputChange }) =>
       />
     );
   });
-
-export default RadioScale;
