@@ -13,6 +13,21 @@ class Map extends React.Component {
         }
     }
 
+    componentDidMount() {
+
+    }
+
+    componentDidUpdate() {
+
+    }
+
+    recenterMap() {
+
+    }
+
+    loadmap() {
+
+    }
 
     render() {
         return (
