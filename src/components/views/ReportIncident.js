@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { RadioScale } from "../form/RadioScale";
 import { Button } from "../Button";
+import MapContainer from "../map/MapContainer";
 
 export class ReportIncident extends Component {
   constructor(props) {
@@ -42,6 +43,9 @@ export class ReportIncident extends Component {
   render() {
     return (
       <div>
+        <div>
+          <MapContainer />
+        </div>
         <form action="submit">
           {/* INSERT MAP HERE */}
           {/* INSERT TEXTFIELD HERE */}
