@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { GoogleApiWrapper } from "google-maps-react";
 import Map from "./Map";
-// import apikey from "../../apikeys.json";
 
 class MapContainer extends Component {
   // this is the container for the map, in terms of width heigh and position we should only style this and not the Map component itself
