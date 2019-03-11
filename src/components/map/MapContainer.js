@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { GoogleApiWrapper, Map } from "google-maps-react";
+import { DisplayAddress } from "./DisplayAddress";
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      address: "",
       currentLocation: {
         lat: null,
         lng: null
@@ -29,6 +31,21 @@ class MapContainer extends Component {
         });
       });
     }
+    const { google } = this.props;
+    const geocoder = new google.maps.Geocoder();
+    this.geocodeLatLng(geocoder);
+  }
+
+  // get address from lat and lng
+  geocodeLatLng(geo) {
+    const latlng = {
+      lat: this.state.currentLocation.lat,
+      lng: this.state.currentLocation.lng
+    };
+    geo.geocode({ location: latlng }, res => {
+      const address = res[0].formatted_address;
+      this.setState({ address })
+    });
   }
 
   // updating the state with the new coordinates when the user moves the map
@@ -55,6 +72,7 @@ class MapContainer extends Component {
     }
     return (
       <div style={style1}>
+        <DisplayAddress address={this.state.address} />
         {this.state.currentLocation.lat && ( // checking if state is already populated with the current locations
           <Map
             zoom={15}
