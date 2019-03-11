@@ -1,25 +1,68 @@
 import React, { Component } from "react";
-import { GoogleApiWrapper } from "google-maps-react";
-import Map from "./Map";
+import { GoogleApiWrapper, Map } from "google-maps-react";
 
 class MapContainer extends Component {
-  // this is the container for the map, in terms of width heigh and position we should only style this and not the Map component itself
-  // this is just for the testing. we'll change it later according to our styling and needs
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentLocation: {
+        lat: null,
+        lng: null
+      }
+    };
+  }
+
+  //  retrieve the current location of the user from the browser API
+  componentDidMount() {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { coords } = pos;
+        this.setState({
+          currentLocation: {
+            lat: coords.latitude,
+            lng: coords.longitude
+          },
+          centerMarker: {
+            lat: coords.latitude,
+            lng: coords.longitude
+          }
+        });
+      });
+    }
+  }
+
+  // updating the state with the new coordinates when the user moves the map
+  centerMoved(mapProps, map) {
+    const currentCenter = {
+      lat: map.getCenter().lat(),
+      lng: map.getCenter().lng()
+    };
+
+    this.setState({ centerMarker: currentCenter });
+  }
+
   render() {
     const style1 = {
       width: "90%",
-      height: "100px",
+      height: "400px",
       margin: "auto",
       marginTop: "20px",
       position: "relative"
     };
 
-    if (!this.props.loaded) {
+    if (!this.state.currentLocation.lat) {
       return <div>...Loading</div>;
     }
     return (
       <div style={style1}>
-        <Map google={this.props.google} />
+        {this.state.currentLocation.lat && ( // checking if state is already populated with the current locations
+          <Map
+            zoom={15}
+            google={this.props.google}
+            initialCenter={this.state.currentLocation}
+            onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
+          />
+        )}
       </div>
     );
   }
