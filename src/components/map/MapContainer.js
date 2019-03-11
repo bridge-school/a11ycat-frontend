@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { GoogleApiWrapper, Map } from "google-maps-react";
+import { DisplayAddress } from "./DisplayAddress";
 
 class MapContainer extends Component {
   constructor(props) {
@@ -70,6 +71,7 @@ class MapContainer extends Component {
     }
     return (
       <div style={style1}>
+        <DisplayAddress address={this.state.address} />
         {this.state.currentLocation.lat && ( // checking if state is already populated with the current locations
           <Map
             zoom={15}
