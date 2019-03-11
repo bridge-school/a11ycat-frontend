@@ -5,6 +5,7 @@ class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      address: "",
       currentLocation: {
         lat: null,
         lng: null
@@ -29,6 +30,20 @@ class MapContainer extends Component {
         });
       });
     }
+    const { google } = this.props;
+    const geocoder = new google.maps.Geocoder();
+    this.geocodeLatLng(geocoder);
+  }
+
+  // get address from lat and lng
+  geocodeLatLng(geo) {
+    const latlng = {
+      lat: this.state.currentLocation.lat,
+      lng: this.state.currentLocation.lng
+    };
+    geo.geocode({ location: latlng }, res =>
+      this.setState({ address: res[0].formatted_address })
+    );
   }
 
   // updating the state with the new coordinates when the user moves the map
