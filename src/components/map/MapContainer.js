@@ -42,9 +42,10 @@ class MapContainer extends Component {
       lat: this.state.currentLocation.lat,
       lng: this.state.currentLocation.lng
     };
-    geo.geocode({ location: latlng }, res =>
-      this.setState({ address: res[0].formatted_address })
-    );
+    geo.geocode({ location: latlng }, res => {
+      const address = res[0].formatted_address;
+      this.setState({ address })
+    });
   }
 
   // updating the state with the new coordinates when the user moves the map
