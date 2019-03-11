@@ -1,4 +1,5 @@
 import React from "react";
+import { DisplayAddress } from "./DisplayAddress";
 
 class Map extends React.Component {
   constructor(props) {
@@ -6,6 +7,7 @@ class Map extends React.Component {
     // const { lat, lng } = this.props.initialCenter; // this will be provided by the browser's location
     this.mapRef = React.createRef(); // this creates a ref that we will use for the map div
     this.state = {
+      address: "",
       currentLocation: {
         lat: null,
         lng: null
@@ -34,6 +36,21 @@ class Map extends React.Component {
       });
     }
     this.loadMap();
+
+    const { google } = this.props;
+    const geocoder = new google.maps.Geocoder();
+    this.geocodeLatLng(geocoder);
+  }
+
+  // get address from lat and lng
+  geocodeLatLng(geo) {
+    const latlng = {
+      lat: this.state.currentLocation.lat,
+      lng: this.state.currentLocation.lng
+    };
+    geo.geocode({ location: latlng }, res =>
+      this.setState({ address: res[0].formatted_address })
+    );
   }
 
   loadMap() {
@@ -83,9 +100,12 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div style={{ height: "300px" }} ref={this.mapRef}>
-        Loading map...
-      </div>
+      <>
+        <DisplayAddress address={this.state.address} />
+        <div style={{ height: "300px" }} ref={this.mapRef}>
+          Loading map...
+        </div>
+      </>
     );
   }
 }
