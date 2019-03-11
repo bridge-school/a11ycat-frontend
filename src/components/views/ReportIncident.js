@@ -4,7 +4,6 @@ import { RadioScale } from "../form/RadioScale";
 import { Button } from "../Button";
 import MapContainer from "../map/MapContainer";
 
-
 export class ReportIncident extends Component {
   constructor(props) {
     super(props);
