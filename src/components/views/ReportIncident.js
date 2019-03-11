@@ -47,16 +47,17 @@ export class ReportIncident extends Component {
     e.preventDefault();
     const formData = {
       emojiRating: this.state.selectedInput,
-      location: "Toronto"
+      // TODO: get data from location in browser instead of hardcoded
+      location: { lat: 45.333, lng: 14.333 },
+      textLocation: "Toronto"
     };
 
-    axios.post("http://localhost:8081/addReport", { formData });
+    axios.post("/catcalls", { formData }).then(data => {
+      // TODO: dispatch action to store in redux
+      console.log(data);
+    });
     // .then(res => console.log(res))
     // .catch(err => console.log(err));
-  }
-
-  static componentDidMount() {
-    axios.get("http://localhost:8081/catcalls");
   }
 
   render() {
