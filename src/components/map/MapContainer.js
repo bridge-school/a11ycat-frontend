@@ -44,7 +44,7 @@ class MapContainer extends Component {
     };
     geo.geocode({ location: latlng }, res => {
       const address = res[0].formatted_address;
-      this.setState({ address })
+      this.setState({ address });
     });
   }
 

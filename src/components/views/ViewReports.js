@@ -1,21 +1,24 @@
 import React from "react";
-import axios from 'axios';
-import { connect } from 'react-redux'
+import axios from "axios";
+import { connect } from "react-redux";
 
-import { getCatcallsSuccess } from '../../store/actions'
+import { getCatcallsSuccess } from "../../store/actions";
 
 class ViewReports extends React.Component {
   componentDidMount() {
-    axios.get('/catcalls').then(response => {
-      this.props.getCatcallsSuccess(response.data.data)
-    })
+    axios.get("/catcalls").then(response => {
+      this.props.getCatcallsSuccess(response.data.data);
+    });
   }
 
   render() {
     return (
       <div>
-        {this.props.catcalls.map((locations, index) =>
-          <div key={locations.textLocation + index}>{locations.textLocation}</div>)}
+        {this.props.catcalls.map((locations, index) => (
+          <div key={locations.textLocation + index}>
+            {locations.textLocation}
+          </div>
+        ))}
       </div>
     );
   }
@@ -23,10 +26,13 @@ class ViewReports extends React.Component {
 
 const mapStateToProps = state => ({
   catcalls: state.catcalls
-})
+});
 
 const mapDispatchToProps = {
   getCatcallsSuccess
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewReports);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ViewReports);
