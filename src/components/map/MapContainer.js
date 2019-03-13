@@ -11,7 +11,40 @@ class MapContainer extends Component {
       currentLocation: {
         lat: null,
         lng: null
-      }
+      },
+      latLngArray: [
+        {
+          key: '1',
+          coords: {
+            lat: 44,
+            lng: -79
+          }
+        },
+        {
+          key: '2',
+          coords: {
+            lat: 43.38475,
+            lng: -79.83744
+          }
+        },
+        {
+          key: '3',
+          coords: {
+            lat: 43.39475,
+            lng: -79.8544
+          }
+        },
+        {
+          key: '4',
+          coords: {
+            lat: 43.36475,
+            lng: -79.81744
+          }
+        }
+
+      ],
+      currentView: 'viewReports' // change to 'reportIncident to view the current location marker
+
     };
   }
 
@@ -59,6 +92,8 @@ class MapContainer extends Component {
     this.setState({ centerMarker: currentCenter });
   }
 
+
+
   render() {
     const style1 = {
       width: "90%",
@@ -81,11 +116,24 @@ class MapContainer extends Component {
             initialCenter={this.state.currentLocation}
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
+
             <Marker
               title={'MYCURRENTLOCATION'}
               name={'MYCURRENTLOCATION'}
               position={this.state.centerMarker}
+              icon={{
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+              }}
             />
+
+            {this.state.latLngArray.map((coords, i) =>
+              < Marker
+                key={i}
+                title={i}
+                position={coords}
+                icon={{ strokeColor: "red" }}
+              />
+            )}
 
           </Map>
         )}
