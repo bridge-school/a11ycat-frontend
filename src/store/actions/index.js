@@ -11,3 +11,6 @@ export const getCatcallsSuccess = data => ({
   type: "GET_CATCALLS_SUCCESS",
   payload: data
 });
+
+// FORM RADIO SCALE
+export const SELECTED_RATING = "SELECTED_RATING";
