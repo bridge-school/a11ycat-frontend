@@ -82,11 +82,10 @@ class MapContainer extends Component {
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
             <Marker
-              title={'MYCURRENTLOCATION'}
-              name={'MYCURRENTLOCATION'}
+              title={"MYCURRENTLOCATION"}
+              name={"MYCURRENTLOCATION"}
               position={this.state.centerMarker}
             />
-
           </Map>
         )}
       </div>
