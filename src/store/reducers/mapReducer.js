@@ -21,18 +21,16 @@ export default function(state = initialState, action) {
     case types.SET_LAT_LNG_SUCCESS: {
       return {
         ...state,
-        error: false,
         loading: false,
         currentLocation: {
-          lat: action.lat,
-          lng: action.lng
+          lat: action.currentLocation.lat,
+          lng: action.currentLocation.lng
         }
       };
     }
     case types.SET_LAT_LNG_FAILURE: {
       return {
         ...state,
-        error: true,
         loading: false,
         currentLocation: {
           address: ""
