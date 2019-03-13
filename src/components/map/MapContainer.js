@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { GoogleApiWrapper, Map } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
 
 class MapContainer extends Component {
@@ -79,15 +80,31 @@ class MapContainer extends Component {
             google={this.props.google}
             initialCenter={this.state.currentLocation}
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
-          />
+          >
+            <Marker
+              title={'MYCURRENTLOCATION'}
+              name={'MYCURRENTLOCATION'}
+              position={this.state.centerMarker}
+            />
+
+          </Map>
         )}
       </div>
     );
   }
 }
 
+const mapStateToProps = store => ({
+  lat: store.map.currentLocation.lat,
+  lng: store.map.currentLocation.lng,
+  address: store.map.currentLocation.address,
+  loading: store.map.loading
+});
+
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-export default GoogleApiWrapper({
-  apiKey: key
-})(MapContainer);
+export default connect(mapStateToProps)(
+  GoogleApiWrapper({
+    apiKey: key
+  })(MapContainer)
+);
