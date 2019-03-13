@@ -90,7 +90,8 @@ class MapContainer extends Component {
 const mapStateToProps = store => ({
   lat: store.map.currentLocation.lat,
   lng: store.map.currentLocation.lng,
-  address: store.map.address
+  address: store.map.currentLocation.address,
+  loading: store.map.loading
 });
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
