@@ -44,8 +44,7 @@ export class ReportIncident extends Component {
     return (
       <div>
         <form action="submit">
-          {/* INSERT MAP HERE */}
-          {/* INSERT TEXTFIELD HERE */}
+          <MapContainer />
           <h3>Please state how you felt when the incident happened </h3>
           <RadioScale
             selectedInput={this.state.selectedInput}
@@ -58,9 +57,6 @@ export class ReportIncident extends Component {
         <Link to="/view-reports">
           <Button text={"Cancel"} />
         </Link>
-        <div>
-          <MapContainer />
-        </div>
       </div>
     );
   }
