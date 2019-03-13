@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { GoogleApiWrapper, Map } from "google-maps-react";
 import { DisplayAddress } from "./DisplayAddress";
 
@@ -86,8 +87,17 @@ class MapContainer extends Component {
   }
 }
 
+const mapStateToProps = store => ({
+  lat: store.map.currentLocation.lat,
+  lng: store.map.currentLocation.lng,
+  address: store.map.currentLocation.address,
+  loading: store.map.loading
+});
+
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-export default GoogleApiWrapper({
-  apiKey: key
-})(MapContainer);
+export default connect(mapStateToProps)(
+  GoogleApiWrapper({
+    apiKey: key
+  })(MapContainer)
+);
