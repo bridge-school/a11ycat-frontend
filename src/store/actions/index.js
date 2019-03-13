@@ -1,5 +1,6 @@
 // MAP
 
+export const MAP_IS_LOADING = "MAP_IS_LOADING";
 export const SET_LAT_LNG = "SET_LAT_LNG";
 export const SET_LAT_LNG_SUCCESS = "SET_LAT_LNG_SUCCESS";
 export const SET_LAT_LNG_FAILURE = "SET_LAT_LNG_FAILURE";

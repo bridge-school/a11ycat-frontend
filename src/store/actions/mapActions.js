@@ -3,6 +3,13 @@ import * as types from "./index";
 
 // NORMAL ACTIONS
 
+export function mapIsLoading(bool) {
+  return {
+    type: types.MAP_IS_LOADING,
+    loading: bool
+  };
+}
+
 export function setLatLngSuccess(currentLocation) {
   return {
     type: types.SET_LAT_LNG_SUCCESS,

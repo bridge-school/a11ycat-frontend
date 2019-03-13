@@ -2,19 +2,27 @@ import * as types from "../actions";
 
 const initialState = {
   error: false,
+  loading: false,
   currentLocation: {
-    lat: null,
-    lng: null
-  },
-  address: ""
+    lat: 43.6532,
+    lng: -79.3832,
+    address: ""
+  }
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case types.MAP_IS_LOADING: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
     case types.SET_LAT_LNG_SUCCESS: {
       return {
         ...state,
         error: false,
+        loading: false,
         currentLocation: {
           lat: action.lat,
           lng: action.lng
@@ -25,21 +33,30 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: true,
-        address: ""
+        loading: false,
+        currentLocation: {
+          address: ""
+        }
       };
     }
     case types.SET_ADDRESS_SUCCESS: {
       return {
         ...state,
         error: false,
-        address: action.address
+        loading: false,
+        currentLocation: {
+          address: action.address
+        }
       };
     }
     case types.SET_ADDRESS_FAILURE: {
       return {
         ...state,
         error: true,
-        address: ""
+        loading: false,
+        currentLocation: {
+          address: ""
+        }
       };
     }
     default: {
