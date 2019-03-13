@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
+import { setAddress } from "../../store/actions/mapActions";
 
 class MapContainer extends Component {
   constructor(props) {
@@ -9,8 +10,8 @@ class MapContainer extends Component {
     this.state = {
       address: "",
       currentLocation: {
-        lat: null,
-        lng: null
+        lat: 43.6532,
+        lng: -79.3832
       }
     };
   }
@@ -33,20 +34,8 @@ class MapContainer extends Component {
       });
     }
     const { google } = this.props;
-    const geocoder = new google.maps.Geocoder();
-    this.geocodeLatLng(geocoder);
-  }
-
-  // get address from lat and lng
-  geocodeLatLng(geo) {
-    const latlng = {
-      lat: this.state.currentLocation.lat,
-      lng: this.state.currentLocation.lng
-    };
-    geo.geocode({ location: latlng }, res => {
-      const address = res[0].formatted_address;
-      this.setState({ address });
-    });
+    const { lat, lng } = this.state.currentLocation;
+    this.props.setAddress({ google, lat, lng });
   }
 
   // updating the state with the new coordinates when the user moves the map
@@ -73,7 +62,7 @@ class MapContainer extends Component {
     }
     return (
       <div style={style1}>
-        <DisplayAddress address={this.state.address} />
+        <DisplayAddress address={this.props.address} />
         {this.state.currentLocation.lat && ( // checking if state is already populated with the current locations
           <Map
             zoom={15}
@@ -100,9 +89,16 @@ const mapStateToProps = store => ({
   loading: store.map.loading
 });
 
+const mapDispatchToProps = {
+  setAddress
+};
+
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-export default connect(mapStateToProps)(
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
   GoogleApiWrapper({
     apiKey: key
   })(MapContainer)
