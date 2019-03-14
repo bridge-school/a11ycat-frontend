@@ -14,37 +14,35 @@ class MapContainer extends Component {
       },
       latLngArray: [
         {
-          key: '1',
+          key: "1",
           coords: {
             lat: 44,
             lng: -79
           }
         },
         {
-          key: '2',
+          key: "2",
           coords: {
             lat: 43.38475,
             lng: -79.83744
           }
         },
         {
-          key: '3',
+          key: "3",
           coords: {
             lat: 43.39475,
             lng: -79.8544
           }
         },
         {
-          key: '4',
+          key: "4",
           coords: {
             lat: 43.36475,
             lng: -79.81744
           }
         }
-
       ],
-      currentView: 'viewReports' // change to 'reportIncident to view the current location marker
-
+      currentView: "viewReports" // change to 'reportIncident to view the current location marker
     };
   }
 
@@ -92,8 +90,6 @@ class MapContainer extends Component {
     this.setState({ centerMarker: currentCenter });
   }
 
-
-
   render() {
     const style1 = {
       width: "90%",
@@ -106,6 +102,8 @@ class MapContainer extends Component {
     if (!this.state.currentLocation.lat) {
       return <div>...Loading</div>;
     }
+
+    let icon;
     return (
       <div style={style1}>
         <DisplayAddress address={this.state.address} />
@@ -116,25 +114,33 @@ class MapContainer extends Component {
             initialCenter={this.state.currentLocation}
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
-
             <Marker
-              title={'MYCURRENTLOCATION'}
-              name={'MYCURRENTLOCATION'}
+              title={"MYCURRENTLOCATION"}
+              name={"MYCURRENTLOCATION"}
               position={this.state.centerMarker}
               icon={{
                 url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
               }}
             />
 
-            {this.state.latLngArray.map((coords, i) =>
-              < Marker
+            {this.state.latLngArray.map((prevReport, i) => {
+              if (prevReport.key === '1') {
+                icon = {
+                  url: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                }
+              }
+              else {
+                icon = {
+                  url: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png'
+                }
+              }
+              return (<Marker
                 key={i}
                 title={i}
-                position={coords}
-                icon={{ strokeColor: "red" }}
-              />
-            )}
-
+                position={prevReport.coords}
+                icon={icon}
+              />)
+            })}
           </Map>
         )}
       </div>
