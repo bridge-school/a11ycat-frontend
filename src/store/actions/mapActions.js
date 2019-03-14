@@ -1,5 +1,5 @@
 import * as types from "./index";
-// import { apiTransformGeoToAddress } from '../api';
+import { apiTransformGeoToAddress } from "../api";
 
 // NORMAL ACTIONS
 
@@ -40,12 +40,11 @@ export function setAddressFailure(bool) {
 
 // ASYNC THUNK ACTIONS
 
-// export function setAddress({ google, lat, lng }) {
-//   return (dispatch) => {
-//     apiTransformGeoToAddress({ google, lat, lng })
-//       .then(
-//         resp => dispatch(setAddressSuccess(resp)),
-//         () => dispatch(setAddressFailure(true)),
-//       );
-//   };
-// };
+export function setAddress({ google, lat, lng }) {
+  return dispatch => {
+    return apiTransformGeoToAddress({ google, lat, lng }).then(
+      resp => dispatch(setAddressSuccess(resp)),
+      () => dispatch(setAddressFailure(true))
+    );
+  };
+}
