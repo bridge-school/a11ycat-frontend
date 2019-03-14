@@ -42,8 +42,11 @@ class MapContainer extends Component {
           }
         }
       ],
-      currentView: "viewReports" // change to 'reportIncident to view the current location marker
+      currentView: "viewReports" // change to 'reportIncident' to view the current location marker
     };
+    this.renderViewReports = this.renderViewReports.bind(this);
+    this.renderReportIncident = this.renderReportIncident.bind(this);
+    this.whatToRender = this.whatToRender.bind(this);
   }
 
   //  retrieve the current location of the user from the browser API
@@ -90,6 +93,38 @@ class MapContainer extends Component {
     this.setState({ centerMarker: currentCenter });
   }
 
+  renderViewReports() {
+    let icon;
+    return this.state.latLngArray.map((prevReport, i) => {
+      if (prevReport.key === "1") {
+        icon = {
+          url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+        };
+      } else {
+        icon = {
+          url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
+        };
+      }
+      return (
+        <Marker key={i} title={i} position={prevReport.coords} icon={icon} />
+      );
+    });
+  }
+
+  renderReportIncident() {
+    return this.state.latLngArray;
+  }
+
+  whatToRender() {
+    if (this.state.currentView === "viewReports") {
+      return this.renderViewReports();
+    }
+    if (this.state.currentView === "reportIncident") {
+      return this.renderReportIncident();
+    }
+    return this.renderReportIncident();
+  }
+
   render() {
     const style1 = {
       width: "90%",
@@ -103,7 +138,6 @@ class MapContainer extends Component {
       return <div>...Loading</div>;
     }
 
-    let icon;
     return (
       <div style={style1}>
         <DisplayAddress address={this.state.address} />
@@ -122,25 +156,7 @@ class MapContainer extends Component {
                 url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
               }}
             />
-
-            {this.state.latLngArray.map((prevReport, i) => {
-              if (prevReport.key === '1') {
-                icon = {
-                  url: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-                }
-              }
-              else {
-                icon = {
-                  url: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png'
-                }
-              }
-              return (<Marker
-                key={i}
-                title={i}
-                position={prevReport.coords}
-                icon={icon}
-              />)
-            })}
+            {this.whatToRender()}
           </Map>
         )}
       </div>
