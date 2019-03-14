@@ -43,7 +43,7 @@ class MapContainer extends Component {
           }
         }
       ],
-      currentView: "viewReports" // change to 'reportIncident' viewReports to view the current location marker
+      currentView: "reportIncident" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
     };
   }
 
@@ -115,6 +115,7 @@ class MapContainer extends Component {
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
             {whatToRender(
+              // checks which view the user is currently on and renders the markers on the map accordingly
               this.state.centerMarker,
               this.state.currentView,
               this.state.latLngArray
