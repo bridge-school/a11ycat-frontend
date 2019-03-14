@@ -1,17 +1,49 @@
 import React, { Component } from "react";
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import { GoogleApiWrapper, Map } from "google-maps-react";
 import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
 import { setAddress, setLatLng } from "../../store/actions/mapActions";
+import { whatToRender } from "./mapRenderMethods";
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentLocation: {
-        lat: 43.6532,
-        lng: -79.3832
-      }
+        lat: null,
+        lng: null
+      },
+      latLngArray: [
+        {
+          key: "1",
+          coords: {
+            lat: 44,
+            lng: -79
+          }
+        },
+        {
+          key: "2",
+          coords: {
+            lat: 43.38475,
+            lng: -79.83744
+          }
+        },
+        {
+          key: "3",
+          coords: {
+            lat: 43.39475,
+            lng: -79.8544
+          }
+        },
+        {
+          key: "4",
+          coords: {
+            lat: 43.36475,
+            lng: -79.81744
+          }
+        }
+      ],
+      currentView: "reportIncident" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
     };
   }
 
@@ -45,6 +77,7 @@ class MapContainer extends Component {
     if (!this.state.currentLocation.lat) {
       return <div>...Loading</div>;
     }
+
     return (
       <div style={style1}>
         <DisplayAddress address={this.props.address} />
@@ -55,11 +88,12 @@ class MapContainer extends Component {
             initialCenter={this.state.currentLocation}
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
-            <Marker
-              title={"MYCURRENTLOCATION"}
-              name={"MYCURRENTLOCATION"}
-              position={this.state.centerMarker}
-            />
+            {whatToRender(
+              // checks which view the user is currently on and renders the markers on the map accordingly
+              this.state.centerMarker,
+              this.state.currentView,
+              this.state.latLngArray
+            )}
           </Map>
         )}
       </div>
