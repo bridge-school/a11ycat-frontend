@@ -5,14 +5,12 @@ import { DisplayAddress } from "./DisplayAddress";
 import { whatToRender } from "./mapRenderMethods";
 import { setAddress } from "../../store/actions/mapActions";
 
-
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: "",
       currentLocation: {
-
         lat: null,
         lng: null
       },
@@ -47,7 +45,6 @@ class MapContainer extends Component {
         }
       ],
       currentView: "reportIncident" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
-
     };
   }
 
@@ -106,14 +103,12 @@ class MapContainer extends Component {
             initialCenter={this.state.currentLocation}
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
-
             {whatToRender(
               // checks which view the user is currently on and renders the markers on the map accordingly
               this.state.centerMarker,
               this.state.currentView,
               this.state.latLngArray
             )}
-
           </Map>
         )}
       </div>
