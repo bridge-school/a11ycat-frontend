@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
-import { setAddress } from "../../store/actions/mapActions";
+import { setAddress, setLatLng } from "../../store/actions/mapActions";
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: "",
       currentLocation: {
         lat: 43.6532,
         lng: -79.3832
@@ -18,21 +17,7 @@ class MapContainer extends Component {
 
   //  retrieve the current location of the user from the browser API
   componentDidMount() {
-    if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const { coords } = pos;
-        this.setState({
-          currentLocation: {
-            lat: coords.latitude,
-            lng: coords.longitude
-          },
-          centerMarker: {
-            lat: coords.latitude,
-            lng: coords.longitude
-          }
-        });
-      });
-    }
+    this.props.setLatLng();
     const { google } = this.props;
     const { lat, lng } = this.state.currentLocation;
     this.props.setAddress({ google, lat, lng });
@@ -90,6 +75,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = {
+  setLatLng,
   setAddress
 };
 
