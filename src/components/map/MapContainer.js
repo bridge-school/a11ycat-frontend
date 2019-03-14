@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import { GoogleApiWrapper, Map } from "google-maps-react";
 import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
+import { whatToRender } from "./mapRenderMethods";
 
 class MapContainer extends Component {
   constructor(props) {
@@ -42,11 +43,8 @@ class MapContainer extends Component {
           }
         }
       ],
-      currentView: "reportIncident" // change to 'reportIncident' viewReportsto view the current location marker
+      currentView: "viewReports" // change to 'reportIncident' viewReports to view the current location marker
     };
-    this.renderViewReports = this.renderViewReports.bind(this);
-    this.renderReportIncident = this.renderReportIncident.bind(this);
-    this.whatToRender = this.whatToRender.bind(this);
   }
 
   //  retrieve the current location of the user from the browser API
@@ -93,47 +91,6 @@ class MapContainer extends Component {
     this.setState({ centerMarker: currentCenter });
   }
 
-  renderViewReports() {
-    let icon;
-    return this.state.latLngArray.map((prevReport, i) => {
-      if (prevReport.key === "1") {
-        icon = {
-          url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
-        };
-      } else {
-        icon = {
-          url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
-        };
-      }
-      return (
-        <Marker key={i} title={i} position={prevReport.coords} icon={icon} />
-      );
-    });
-  }
-
-  renderReportIncident() {
-    return (
-      <Marker
-        title={"MYCURRENTLOCATION"}
-        name={"MYCURRENTLOCATION"}
-        position={this.state.centerMarker}
-        icon={{
-          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        }}
-      />
-    )
-  }
-
-  whatToRender() {
-    if (this.state.currentView === "viewReports") {
-      return this.renderViewReports();
-    }
-    if (this.state.currentView === "reportIncident") {
-      return this.renderReportIncident();
-    }
-    return this.renderReportIncident();
-  }
-
   render() {
     const style1 = {
       width: "90%",
@@ -157,7 +114,11 @@ class MapContainer extends Component {
             initialCenter={this.state.currentLocation}
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
-            {this.whatToRender()}
+            {whatToRender(
+              this.state.centerMarker,
+              this.state.currentView,
+              this.state.latLngArray
+            )}
           </Map>
         )}
       </div>
