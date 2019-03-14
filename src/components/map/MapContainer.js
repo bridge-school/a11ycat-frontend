@@ -42,7 +42,7 @@ class MapContainer extends Component {
           }
         }
       ],
-      currentView: "viewReports" // change to 'reportIncident' to view the current location marker
+      currentView: "reportIncident" // change to 'reportIncident' viewReportsto view the current location marker
     };
     this.renderViewReports = this.renderViewReports.bind(this);
     this.renderReportIncident = this.renderReportIncident.bind(this);
@@ -112,7 +112,16 @@ class MapContainer extends Component {
   }
 
   renderReportIncident() {
-    return this.state.latLngArray;
+    return (
+      <Marker
+        title={"MYCURRENTLOCATION"}
+        name={"MYCURRENTLOCATION"}
+        position={this.state.centerMarker}
+        icon={{
+          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        }}
+      />
+    )
   }
 
   whatToRender() {
@@ -148,14 +157,6 @@ class MapContainer extends Component {
             initialCenter={this.state.currentLocation}
             onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
           >
-            <Marker
-              title={"MYCURRENTLOCATION"}
-              name={"MYCURRENTLOCATION"}
-              position={this.state.centerMarker}
-              icon={{
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-              }}
-            />
             {this.whatToRender()}
           </Map>
         )}
