@@ -1,3 +1,8 @@
+import axios from "axios";
+
+export const apiGetIncidents = () =>
+  axios.get("/catcalls").then(response => response.data.data);
+
 export const apiGetGeoLocation = () => {
   return new Promise(resolve => {
     navigator.geolocation.getCurrentPosition(pos => {
@@ -6,12 +11,21 @@ export const apiGetGeoLocation = () => {
         currentLocation: {
           lat: coords.latitude,
           lng: coords.longitude
-        },
-        centerMarker: {
-          lat: coords.latitude,
-          lng: coords.longitude
         }
       });
+    });
+  });
+};
+
+export const apiCenterMoved = map => {
+  return new Promise(resolve => {
+    const currentCenter = {
+      lat: map.getCenter().lat(),
+      lng: map.getCenter().lng()
+    };
+
+    resolve({
+      centerMarker: currentCenter
     });
   });
 };

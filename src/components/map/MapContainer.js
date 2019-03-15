@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { GoogleApiWrapper, Map } from "google-maps-react";
 import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
-import { setAddress, setLatLng } from "../../store/actions/mapActions";
+import {
+  setLatLng,
+  centerMoved,
+  setAddress
+} from "../../store/actions/mapActions";
 import { whatToRender } from "./mapRenderMethods";
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentLocation: {
-        lat: null,
-        lng: null
-      },
       latLngArray: [
         {
           key: "1",
@@ -51,18 +51,8 @@ class MapContainer extends Component {
   componentDidMount() {
     this.props.setLatLng();
     const { google } = this.props;
-    const { lat, lng } = this.state.currentLocation;
+    const { lat, lng } = this.props.currentLocation;
     this.props.setAddress({ google, lat, lng });
-  }
-
-  // updating the state with the new coordinates when the user moves the map
-  centerMoved(mapProps, map) {
-    const currentCenter = {
-      lat: map.getCenter().lat(),
-      lng: map.getCenter().lng()
-    };
-
-    this.setState({ centerMarker: currentCenter });
   }
 
   render() {
@@ -74,23 +64,23 @@ class MapContainer extends Component {
       position: "relative"
     };
 
-    if (!this.state.currentLocation.lat) {
+    if (!this.props.currentLocation.lat) {
       return <div>...Loading</div>;
     }
 
     return (
       <div style={style1}>
         <DisplayAddress address={this.props.address} />
-        {this.state.currentLocation.lat && ( // checking if state is already populated with the current locations
+        {this.props.currentLocation.lat && ( // checking if state is already populated with the current locations
           <Map
             zoom={15}
             google={this.props.google}
-            initialCenter={this.state.currentLocation}
-            onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
+            initialCenter={this.props.currentLocation}
+            onDrag={(mapProps, map) => this.props.centerMoved(mapProps, map)}
           >
             {whatToRender(
               // checks which view the user is currently on and renders the markers on the map accordingly
-              this.state.centerMarker,
+              this.props.centerMarker,
               this.state.currentView,
               this.state.latLngArray
             )}
@@ -102,14 +92,21 @@ class MapContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  lat: store.map.currentLocation.lat,
-  lng: store.map.currentLocation.lng,
-  address: store.map.currentLocation.address,
+  currentLocation: {
+    lat: store.map.currentLocation.lat,
+    lng: store.map.currentLocation.lng
+  },
+  centerMarker: {
+    lat: store.map.centerMarker.lat,
+    lng: store.map.centerMarker.lng
+  },
+  address: store.map.address,
   loading: store.map.loading
 });
 
 const mapDispatchToProps = {
   setLatLng,
+  centerMoved,
   setAddress
 };
 

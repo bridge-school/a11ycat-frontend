@@ -1,59 +1,72 @@
 import * as types from "./index";
-import { apiTransformGeoToAddress, apiGetGeoLocation } from "../api";
+import {
+  apiGetGeoLocation,
+  apiCenterMoved,
+  apiTransformGeoToAddress
+} from "../api";
 
 // NORMAL ACTIONS
 
-export function mapIsLoading(bool) {
-  return {
-    type: types.MAP_IS_LOADING,
-    loading: bool
-  };
-}
+export const mapIsLoading = bool => ({
+  type: types.MAP_IS_LOADING,
+  loading: bool
+});
 
-export function setLatLngSuccess(currentLocation) {
-  return {
-    type: types.SET_LAT_LNG_SUCCESS,
-    currentLocation
-  };
-}
+export const setCurrentLocationSuccess = currentLocation => ({
+  type: types.SET_CURRENT_LOCATION_SUCCESS,
+  currentLocation
+});
 
-export function setLatLngFailure(bool) {
-  return {
-    type: types.SET_LAT_LNG_FAILURE,
-    error: bool
-  };
-}
+export const setCurrentLocationFailure = bool => ({
+  type: types.SET_CURRENT_LOCATION_FAILURE,
+  error: bool
+});
 
-export function setAddressSuccess(address) {
-  return {
-    type: types.SET_ADDRESS_SUCCESS,
-    address
-  };
-}
+export const centerMovedSuccess = centerMarker => ({
+  type: types.CENTER_MOVED_SUCCESS,
+  centerMarker
+});
 
-export function setAddressFailure(bool) {
-  return {
-    type: types.SET_ADDRESS_FAILURE,
-    error: bool
-  };
-}
+export const centerMovedFailure = bool => ({
+  type: types.CENTER_MOVED_FAILURE,
+  error: bool
+});
+
+export const setAddressSuccess = address => ({
+  type: types.SET_ADDRESS_SUCCESS,
+  address
+});
+
+export const setAddressFailure = bool => ({
+  type: types.SET_ADDRESS_FAILURE,
+  error: bool
+});
 
 // ASYNC THUNK ACTIONS
 
-export function setLatLng() {
-  return dispatch => {
-    return apiGetGeoLocation().then(
-      resp => dispatch(setLatLngSuccess(resp)),
-      () => dispatch(setLatLngFailure(true))
-    );
-  };
-}
+export const setLatLng = () => async dispatch => {
+  try {
+    const resp = await apiGetGeoLocation();
+    return dispatch(setCurrentLocationSuccess(resp));
+  } catch (e) {
+    return dispatch(setCurrentLocationFailure(true));
+  }
+};
 
-export function setAddress({ google, lat, lng }) {
-  return dispatch => {
-    return apiTransformGeoToAddress({ google, lat, lng }).then(
-      resp => dispatch(setAddressSuccess(resp)),
-      () => dispatch(setAddressFailure(true))
-    );
-  };
-}
+export const centerMoved = ({ map }) => async dispatch => {
+  try {
+    const resp = await apiCenterMoved(map);
+    return dispatch(centerMovedSuccess(resp));
+  } catch (e) {
+    return dispatch(centerMovedFailure(true));
+  }
+};
+
+export const setAddress = ({ google, lat, lng }) => async dispatch => {
+  try {
+    const resp = await apiTransformGeoToAddress({ google, lat, lng });
+    return dispatch(setAddressSuccess(resp));
+  } catch (e) {
+    return dispatch(setAddressFailure(true));
+  }
+};
