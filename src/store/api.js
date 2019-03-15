@@ -19,14 +19,12 @@ export const apiGetGeoLocation = () => {
 
 export const apiCenterMoved = map => {
   return new Promise(resolve => {
-    const currentCenter = {
+    const centerMarker = {
       lat: map.getCenter().lat(),
       lng: map.getCenter().lng()
     };
 
-    resolve({
-      centerMarker: currentCenter
-    });
+    resolve(centerMarker);
   });
 };
 

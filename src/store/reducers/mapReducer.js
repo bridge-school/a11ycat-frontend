@@ -45,10 +45,7 @@ export default (state = initialState, action) => {
     case types.CENTER_MOVED_SUCCESS: {
       return {
         ...state,
-        centerMarker: {
-          lat: action.centerMarker.lat,
-          lng: action.centerMarker.lng
-        }
+        centerMarker: action.centerMarker
       };
     }
     case types.CENTER_MOVED_FAILURE: {
