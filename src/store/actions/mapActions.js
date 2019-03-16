@@ -47,7 +47,7 @@ export const setAddressFailure = bool => ({
 export const setLatLng = () => async dispatch => {
   try {
     const resp = await apiGetGeoLocation();
-    return dispatch(console.log(">>>", resp) || setCurrentLocationSuccess(resp));
+    return dispatch(setCurrentLocationSuccess(resp));
   } catch (e) {
     return dispatch(setCurrentLocationFailure(true));
   }
