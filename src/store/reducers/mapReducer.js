@@ -11,7 +11,7 @@ const initialState = {
     lat: 43.6532,
     lng: -79.3832
   },
-  address: ""
+  address: "100 Queen St W, Toronto, ON M5G 1P5, Canada"
 };
 
 export default (state = initialState, action) => {

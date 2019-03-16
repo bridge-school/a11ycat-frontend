@@ -55,7 +55,7 @@ export const setLatLng = () => async dispatch => {
 
 export const centerMoved = ({ map }) => async dispatch => {
   try {
-    const resp = await apiCenterMoved(map);
+    const resp = await apiCenterMoved({ map });
     return dispatch(centerMovedSuccess(resp));
   } catch (e) {
     return dispatch(centerMovedFailure(true));
@@ -68,5 +68,23 @@ export const setAddress = ({ google, lat, lng }) => async dispatch => {
     return dispatch(setAddressSuccess(resp));
   } catch (e) {
     return dispatch(setAddressFailure(true));
+  }
+};
+
+export function setLatLngAndAddress({ google }) {
+  return (dispatch, getState) => {
+    return dispatch(setLatLng()).then(() => {
+      const { lat, lng } = getState().map.currentLocation;
+      return dispatch(setAddress({ google, lat, lng }));
+    })
+  }
+};
+
+export function centerMovedAndAddress({ map, google }) {
+  return (dispatch, getState) => {
+    return dispatch(centerMoved({ map })).then(() => {
+      const { lat, lng } = getState().map.centerMarker;
+      return dispatch(setAddress({ google, lat, lng }));
+    })
   }
 };

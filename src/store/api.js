@@ -17,13 +17,12 @@ export const apiGetGeoLocation = () => {
   });
 };
 
-export const apiCenterMoved = map => {
+export const apiCenterMoved = ({ map }) => {
   return new Promise(resolve => {
     const centerMarker = {
       lat: map.getCenter().lat(),
       lng: map.getCenter().lng()
     };
-
     resolve(centerMarker);
   });
 };
