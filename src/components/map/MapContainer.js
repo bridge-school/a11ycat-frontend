@@ -50,8 +50,6 @@ class MapContainer extends Component {
   componentDidMount() {
     const { google } = this.props;
     this.props.setLatLngAndAddress({ google });
-    // const { lat, lng } = this.props.centerMarker;
-    // this.props.setAddress({ google, lat, lng });
   }
 
   render() {
@@ -75,6 +73,7 @@ class MapContainer extends Component {
             zoom={15}
             google={this.props.google}
             initialCenter={this.props.currentLocation}
+            center={this.props.centerMarker}
             onDragend={(mapProps, map) => {
               const { google } = this.props;
               this.props.centerMovedAndAddress({ map, google });
