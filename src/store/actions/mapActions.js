@@ -47,7 +47,7 @@ export const setAddressFailure = bool => ({
 export const setLatLng = () => async dispatch => {
   try {
     const resp = await apiGetGeoLocation();
-    return dispatch(setCurrentLocationSuccess(resp));
+    return dispatch(console.log(">>>", resp) || setCurrentLocationSuccess(resp));
   } catch (e) {
     return dispatch(setCurrentLocationFailure(true));
   }
@@ -76,15 +76,15 @@ export function setLatLngAndAddress({ google }) {
     return dispatch(setLatLng()).then(() => {
       const { lat, lng } = getState().map.currentLocation;
       return dispatch(setAddress({ google, lat, lng }));
-    })
-  }
-};
+    });
+  };
+}
 
 export function centerMovedAndAddress({ map, google }) {
   return (dispatch, getState) => {
     return dispatch(centerMoved({ map })).then(() => {
       const { lat, lng } = getState().map.centerMarker;
       return dispatch(setAddress({ google, lat, lng }));
-    })
-  }
-};
+    });
+  };
+}

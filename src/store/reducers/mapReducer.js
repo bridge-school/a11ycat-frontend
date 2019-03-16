@@ -26,14 +26,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        currentLocation: {
-          lat: action.currentLocation.lat,
-          lng: action.currentLocation.lng
-        },
-        centerMarker: {
-          lat: action.currentLocation.lat,
-          lng: action.currentLocation.lng
-        }
+        currentLocation: action.currentLocation,
+        centerMarker: action.currentLocation
       };
     }
     case types.SET_CURRENT_LOCATION_FAILURE: {

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
 import {
   setLatLngAndAddress,
-  centerMovedAndAddress,
+  centerMovedAndAddress
 } from "../../store/actions/mapActions";
 import { whatToRender } from "./mapRenderMethods";
 
@@ -76,10 +76,9 @@ class MapContainer extends Component {
             google={this.props.google}
             initialCenter={this.props.currentLocation}
             onDragend={(mapProps, map) => {
-              const { google } = this.props
-              this.props.centerMovedAndAddress({ map, google })
-              }
-            }
+              const { google } = this.props;
+              this.props.centerMovedAndAddress({ map, google });
+            }}
           >
             {whatToRender(
               // checks which view the user is currently on and renders the markers on the map accordingly
@@ -109,7 +108,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = {
   setLatLngAndAddress,
-  centerMovedAndAddress,
+  centerMovedAndAddress
 };
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;

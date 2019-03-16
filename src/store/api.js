@@ -7,12 +7,11 @@ export const apiGetGeoLocation = () => {
   return new Promise(resolve => {
     navigator.geolocation.getCurrentPosition(pos => {
       const { coords } = pos;
-      resolve({
-        currentLocation: {
-          lat: coords.latitude,
-          lng: coords.longitude
-        }
-      });
+      const currentLocation = {
+        lat: coords.latitude,
+        lng: coords.longitude
+      };
+      resolve(currentLocation);
     });
   });
 };
