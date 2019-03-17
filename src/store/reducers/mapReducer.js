@@ -5,12 +5,16 @@ const initialState = {
   loading: false,
   currentLocation: {
     lat: 43.6532,
-    lng: -79.3832,
-    address: ""
-  }
+    lng: -79.3832
+  },
+  centerMarker: {
+    lat: 43.6532,
+    lng: -79.3832
+  },
+  address: "100 Queen St W, Toronto, ON M5G 1P5, Canada"
 };
 
-export default function(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case types.MAP_IS_LOADING: {
       return {
@@ -18,23 +22,29 @@ export default function(state = initialState, action) {
         loading: true
       };
     }
-    case types.SET_LAT_LNG_SUCCESS: {
+    case types.SET_CURRENT_LOCATION_SUCCESS: {
       return {
         ...state,
         loading: false,
-        currentLocation: {
-          lat: action.currentLocation.lat,
-          lng: action.currentLocation.lng
-        }
+        currentLocation: action.currentLocation,
+        centerMarker: action.currentLocation
       };
     }
-    case types.SET_LAT_LNG_FAILURE: {
+    case types.SET_CURRENT_LOCATION_FAILURE: {
       return {
         ...state,
-        loading: false,
-        currentLocation: {
-          address: ""
-        }
+        loading: false
+      };
+    }
+    case types.CENTER_MOVED_SUCCESS: {
+      return {
+        ...state,
+        centerMarker: action.centerMarker
+      };
+    }
+    case types.CENTER_MOVED_FAILURE: {
+      return {
+        ...state
       };
     }
     case types.SET_ADDRESS_SUCCESS: {
@@ -42,9 +52,7 @@ export default function(state = initialState, action) {
         ...state,
         error: false,
         loading: false,
-        currentLocation: {
-          address: action.address
-        }
+        address: action.address
       };
     }
     case types.SET_ADDRESS_FAILURE: {
@@ -52,13 +60,11 @@ export default function(state = initialState, action) {
         ...state,
         error: true,
         loading: false,
-        currentLocation: {
-          address: ""
-        }
+        address: ""
       };
     }
     default: {
       return state;
     }
   }
-}
+};
