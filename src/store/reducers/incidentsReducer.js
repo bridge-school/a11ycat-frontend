@@ -3,7 +3,8 @@ import * as types from "../actions";
 const initialState = {
   error: false,
   loading: false,
-  incidents: []
+  incidents: [],
+  submittedID: ""
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +20,18 @@ export default (state = initialState, action) => {
         ...state,
         error: true,
         loading: false
+      };
+    }
+    case types.SUBMIT_FORM_SUCCESS: {
+      return {
+        ...state,
+        submittedID: action.successID
+      };
+    }
+    case types.SUBMIT_FORM_FAILURE: {
+      return {
+        ...state,
+        error: true
       };
     }
     default: {

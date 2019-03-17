@@ -1,5 +1,6 @@
+import { push } from "connected-react-router";
 import * as types from "./index";
-import { apiGetIncidents } from "../api";
+import { apiGetIncidents, apiPostForm } from "../api";
 
 // NORMAL ACTIONS
 
@@ -13,6 +14,16 @@ export const getIncidentsFailure = bool => ({
   error: bool
 });
 
+export const submitFormSuccess = successID => ({
+  type: types.SUBMIT_FORM_SUCCESS,
+  submittedID: successID
+});
+
+export const submitFormFailure = bool => ({
+  type: types.SUBMIT_FORM_FAILURE,
+  error: bool
+});
+
 // ASYNC THUNK ACTIONS
 
 export const getIncidents = () => async dispatch => {
@@ -21,5 +32,16 @@ export const getIncidents = () => async dispatch => {
     return dispatch(getIncidentsSuccess(resp));
   } catch (e) {
     return dispatch(getIncidentsFailure(true));
+  }
+};
+
+export const submitForm = ({ formData }) => async dispatch => {
+  try {
+    const resp = await apiPostForm({ formData });
+    return dispatch(submitFormSuccess(resp)).then(() =>
+      dispatch(push("/view-reports"))
+    );
+  } catch (e) {
+    return dispatch(submitFormFailure(true));
   }
 };
