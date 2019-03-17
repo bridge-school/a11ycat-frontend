@@ -2,18 +2,16 @@ import React, { Component } from "react";
 import { GoogleApiWrapper, Map } from "google-maps-react";
 import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
+import {
+  setLatLngAndAddress,
+  centerMovedAndAddress
+} from "../../store/actions/mapActions";
 import { whatToRender } from "./mapRenderMethods";
-import { setAddress } from "../../store/actions/mapActions";
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: "",
-      currentLocation: {
-        lat: null,
-        lng: null
-      },
       latLngArray: [
         {
           key: "1",
@@ -50,34 +48,8 @@ class MapContainer extends Component {
 
   //  retrieve the current location of the user from the browser API
   componentDidMount() {
-    if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const { coords } = pos;
-        this.setState({
-          currentLocation: {
-            lat: coords.latitude,
-            lng: coords.longitude
-          },
-          centerMarker: {
-            lat: coords.latitude,
-            lng: coords.longitude
-          }
-        });
-      });
-    }
     const { google } = this.props;
-    const { lat, lng } = this.state.currentLocation;
-    this.props.setAddress({ google, lat, lng });
-  }
-
-  // updating the state with the new coordinates when the user moves the map
-  centerMoved(mapProps, map) {
-    const currentCenter = {
-      lat: map.getCenter().lat(),
-      lng: map.getCenter().lng()
-    };
-
-    this.setState({ centerMarker: currentCenter });
+    this.props.setLatLngAndAddress({ google });
   }
 
   render() {
@@ -89,23 +61,27 @@ class MapContainer extends Component {
       position: "relative"
     };
 
-    if (!this.state.currentLocation.lat) {
+    if (!this.props.currentLocation.lat) {
       return <div>...Loading</div>;
     }
 
     return (
       <div style={style1}>
         <DisplayAddress address={this.props.address} />
-        {this.state.currentLocation.lat && ( // checking if state is already populated with the current locations
+        {this.props.currentLocation.lat && ( // checking if state is already populated with the current locations
           <Map
             zoom={15}
             google={this.props.google}
-            initialCenter={this.state.currentLocation}
-            onDragend={(mapProps, map) => this.centerMoved(mapProps, map)}
+            initialCenter={this.props.currentLocation}
+            center={this.props.centerMarker}
+            onDragend={(mapProps, map) => {
+              const { google } = this.props;
+              this.props.centerMovedAndAddress({ map, google });
+            }}
           >
             {whatToRender(
               // checks which view the user is currently on and renders the markers on the map accordingly
-              this.state.centerMarker,
+              this.props.centerMarker,
               this.state.currentView,
               this.state.latLngArray
             )}
@@ -117,14 +93,21 @@ class MapContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  lat: store.map.currentLocation.lat,
-  lng: store.map.currentLocation.lng,
-  address: store.map.currentLocation.address,
+  currentLocation: {
+    lat: store.map.currentLocation.lat,
+    lng: store.map.currentLocation.lng
+  },
+  centerMarker: {
+    lat: store.map.centerMarker.lat,
+    lng: store.map.centerMarker.lng
+  },
+  address: store.map.address,
   loading: store.map.loading
 });
 
 const mapDispatchToProps = {
-  setAddress
+  setLatLngAndAddress,
+  centerMovedAndAddress
 };
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;

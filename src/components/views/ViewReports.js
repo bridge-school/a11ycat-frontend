@@ -1,20 +1,17 @@
 import React from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 
-import { getCatcallsSuccess } from "../../store/actions";
+import { getIncidents } from "../../store/actions/incidentsActions";
 
 class ViewReports extends React.Component {
   componentDidMount() {
-    axios.get("/catcalls").then(response => {
-      this.props.getCatcallsSuccess(response.data.data);
-    });
+    this.props.getIncidents();
   }
 
   render() {
     return (
       <div>
-        {this.props.catcalls.map((locations, index) => (
+        {this.props.incidents.map((locations, index) => (
           <div key={locations.textLocation + index}>
             {locations.textLocation}
           </div>
@@ -24,12 +21,12 @@ class ViewReports extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  catcalls: state.catcalls
+const mapStateToProps = store => ({
+  incidents: store.incidents.incidents
 });
 
 const mapDispatchToProps = {
-  getCatcallsSuccess
+  getIncidents
 };
 
 export default connect(

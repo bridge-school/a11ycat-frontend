@@ -1,5 +1,4 @@
 import React from "react";
-import { DisplayAddress } from "./DisplayAddress";
 
 class Map extends React.Component {
   constructor(props) {
@@ -17,7 +16,7 @@ class Map extends React.Component {
   /* short explanation about how this workers
       Component did mount uses browser’s location api to get the current coordinates of the user and saves them in state. 
       Then calls load map which creates the map in the div we specify using a ref, 
-      it receives an object with lat and lng of the user’s current location to know what to centre around and a zoom. 
+      it receives an object with lat and lng of the user’s current location to know what to center around and a zoom. 
       component did update checks if anything changed in the google map/ user's location and calls load map or re-center accordingly
       recenter map does just that, recenters the map
       */
@@ -35,21 +34,6 @@ class Map extends React.Component {
       });
     }
     this.loadMap();
-
-    const { google } = this.props;
-    const geocoder = new google.maps.Geocoder();
-    this.geocodeLatLng(geocoder);
-  }
-
-  // get address from lat and lng
-  geocodeLatLng(geo) {
-    const latlng = {
-      lat: this.state.currentLocation.lat,
-      lng: this.state.currentLocation.lng
-    };
-    geo.geocode({ location: latlng }, res =>
-      this.setState({ address: res[0].formatted_address })
-    );
   }
 
   loadMap() {
@@ -100,7 +84,6 @@ class Map extends React.Component {
   render() {
     return (
       <>
-        <DisplayAddress address={this.state.address} />
         <div style={{ height: "300px" }} ref={this.mapRef}>
           Loading map...
         </div>
