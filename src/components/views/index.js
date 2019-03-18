@@ -1,5 +1,5 @@
 import { SelectAction } from "./SelectAction";
-import { ReportIncident } from "./ReportIncident";
+import ReportIncident from "./ReportIncident";
 import ViewReports from "./ViewReports";
 import { NotFound } from "./NotFound";
 
