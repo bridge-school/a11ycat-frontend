@@ -42,7 +42,7 @@ class MapContainer extends Component {
           }
         }
       ],
-      currentView: "reportIncident" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
+      currentView: "viewReports" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
     };
   }
 
