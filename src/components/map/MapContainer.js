@@ -16,22 +16,22 @@ class MapContainer extends Component {
         {
           key: "1",
           coords: {
-            lat: 44,
-            lng: -79
+            lat: 43.66611298,
+            lng: -79.3388593
           }
         },
         {
           key: "2",
           coords: {
-            lat: 43.38475,
-            lng: -79.83744
+            lat: 43.666112966,
+            lng: -79.3388593124
           }
         },
         {
           key: "3",
           coords: {
-            lat: 43.39475,
-            lng: -79.8544
+            lat: 43.679748141321284,
+            lng: -79.35109485776366
           }
         },
         {
@@ -82,7 +82,7 @@ class MapContainer extends Component {
             {whatToRender(
               // checks which view the user is currently on and renders the markers on the map accordingly
               this.props.centerMarker,
-              this.state.currentView,
+              this.props.pathname,
               this.state.latLngArray
             )}
           </Map>
@@ -93,16 +93,11 @@ class MapContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  currentLocation: {
-    lat: store.map.currentLocation.lat,
-    lng: store.map.currentLocation.lng
-  },
-  centerMarker: {
-    lat: store.map.centerMarker.lat,
-    lng: store.map.centerMarker.lng
-  },
+  currentLocation: store.map.currentLocation,
+  centerMarker: store.map.centerMarker,
   address: store.map.address,
-  loading: store.map.loading
+  loading: store.map.loading,
+  pathname: store.router.location.pathname
 });
 
 const mapDispatchToProps = {
