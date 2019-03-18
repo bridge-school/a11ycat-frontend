@@ -18,7 +18,7 @@ export const renderViewReports = latLngArray => {
       };
     }
     return (
-      <Marker key={i} title={i} position={prevReport.coords} icon={icon} />
+      <Marker key={i} title={toString(i)} position={prevReport.coords} icon={icon} />
     );
   });
 };
