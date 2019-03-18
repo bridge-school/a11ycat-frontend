@@ -45,6 +45,7 @@ export const setAddressFailure = bool => ({
 // ASYNC THUNK ACTIONS
 
 export const setLatLng = () => async dispatch => {
+  dispatch(mapIsLoading(true));
   try {
     const resp = await apiGetGeoLocation();
     return dispatch(setCurrentLocationSuccess(resp));
