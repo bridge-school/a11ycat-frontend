@@ -6,50 +6,20 @@ import {
   setLatLngAndAddress,
   centerMovedAndAddress
 } from "../../store/actions/mapActions";
+import { getIncidents } from "../../store/actions/incidentsActions";
 import { whatToRender } from "./mapRenderMethods";
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      latLngArray: [
-        {
-          key: "1",
-          coords: {
-            lat: 43.66611298,
-            lng: -79.3388593
-          }
-        },
-        {
-          key: "2",
-          coords: {
-            lat: 43.666112966,
-            lng: -79.3388593124
-          }
-        },
-        {
-          key: "3",
-          coords: {
-            lat: 43.679748141321284,
-            lng: -79.35109485776366
-          }
-        },
-        {
-          key: "4",
-          coords: {
-            lat: 43.36475,
-            lng: -79.81744
-          }
-        }
-      ],
-      currentView: "reportIncident" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
-    };
+    this.state = {};
   }
 
   //  retrieve the current location of the user from the browser API
   componentDidMount() {
     const { google } = this.props;
     this.props.setLatLngAndAddress({ google });
+    this.props.getIncidents();
   }
 
   render() {
@@ -83,7 +53,7 @@ class MapContainer extends Component {
               // checks which view the user is currently on and renders the markers on the map accordingly
               this.props.centerMarker,
               this.props.pathname,
-              this.state.latLngArray
+              this.props.incidents
             )}
           </Map>
         )}
@@ -97,12 +67,14 @@ const mapStateToProps = store => ({
   centerMarker: store.map.centerMarker,
   address: store.map.address,
   loading: store.map.loading,
+  incidents: store.incidents.incidents,
   pathname: store.router.location.pathname
 });
 
 const mapDispatchToProps = {
   setLatLngAndAddress,
-  centerMovedAndAddress
+  centerMovedAndAddress,
+  getIncidents
 };
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
