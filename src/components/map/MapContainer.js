@@ -54,7 +54,7 @@ class MapContainer extends Component {
             {whatToRender(
               // checks which view the user is currently on and renders the markers on the map accordingly
               this.props.centerMarker,
-              this.state.currentView,
+              this.props.pathname,
               this.props.incidents
             )}
           </Map>
@@ -65,17 +65,12 @@ class MapContainer extends Component {
 }
 
 const mapStateToProps = store => ({
-  currentLocation: {
-    lat: store.map.currentLocation.lat,
-    lng: store.map.currentLocation.lng
-  },
-  centerMarker: {
-    lat: store.map.centerMarker.lat,
-    lng: store.map.centerMarker.lng
-  },
+  currentLocation: store.map.currentLocation,
+  centerMarker: store.map.centerMarker,
   address: store.map.address,
   loading: store.map.loading,
-  incidents: store.incidents.incidents
+  incidents: store.incidents.incidents,
+  pathname: store.router.location.pathname
 });
 
 const mapDispatchToProps = {

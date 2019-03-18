@@ -43,12 +43,7 @@ export const renderReportIncident = currentCenter => {
 };
 
 //
-export const whatToRender = (currentCenter, currentView, incidents) => {
-  if (currentView === "viewReports") {
-    return renderViewReports(incidents);
-  }
-  if (currentView === "reportIncident") {
-    return renderReportIncident(currentCenter);
-  }
-  return renderViewReports();
-};
+export const whatToRender = (currentCenter, pathname, latLngArray) =>
+  pathname === "/view-reports"
+    ? renderViewReports(latLngArray)
+    : renderReportIncident(currentCenter);
