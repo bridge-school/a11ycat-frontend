@@ -8,6 +8,7 @@ import {
 } from "../../store/actions/mapActions";
 import { getIncidents } from "../../store/actions/incidentsActions";
 import { whatToRender } from "./mapRenderMethods";
+import { Loading } from "../Loading";
 
 class MapContainer extends Component {
   constructor(props) {
@@ -31,14 +32,12 @@ class MapContainer extends Component {
       position: "relative"
     };
 
-    if (!this.props.currentLocation.lat) {
-      return <div>...Loading</div>;
-    }
-
     return (
       <div style={style1}>
         <DisplayAddress address={this.props.address} />
-        {this.props.currentLocation.lat && ( // checking if state is already populated with the current locations
+        {this.props.loading ? (
+          <Loading />
+        ) : (
           <Map
             zoom={15}
             google={this.props.google}
