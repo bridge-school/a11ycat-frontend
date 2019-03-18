@@ -3,11 +3,12 @@ import axios from "axios";
 export const apiGetIncidents = () =>
   axios.get("/catcalls").then(response => response.data.data);
 
-export const apiPostForm = ({ formData }) =>
+export const apiPostForm = formData => {
   axios
     .post("/catcalls", formData)
     .then(res => res)
     .catch(err => err);
+};
 
 export const apiGetGeoLocation = () => {
   return new Promise(resolve => {
