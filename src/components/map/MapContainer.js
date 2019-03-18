@@ -6,42 +6,13 @@ import {
   setLatLngAndAddress,
   centerMovedAndAddress
 } from "../../store/actions/mapActions";
+import { getIncidents } from "../../store/actions/incidentsActions";
 import { whatToRender } from "./mapRenderMethods";
 
 class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      latLngArray: [
-        {
-          key: "1",
-          coords: {
-            lat: 44,
-            lng: -79
-          }
-        },
-        {
-          key: "2",
-          coords: {
-            lat: 43.38475,
-            lng: -79.83744
-          }
-        },
-        {
-          key: "3",
-          coords: {
-            lat: 43.39475,
-            lng: -79.8544
-          }
-        },
-        {
-          key: "4",
-          coords: {
-            lat: 43.36475,
-            lng: -79.81744
-          }
-        }
-      ],
       currentView: "viewReports" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
     };
   }
@@ -50,6 +21,7 @@ class MapContainer extends Component {
   componentDidMount() {
     const { google } = this.props;
     this.props.setLatLngAndAddress({ google });
+    this.props.getIncidents();
   }
 
   render() {
@@ -83,7 +55,7 @@ class MapContainer extends Component {
               // checks which view the user is currently on and renders the markers on the map accordingly
               this.props.centerMarker,
               this.state.currentView,
-              this.state.latLngArray
+              this.props.incidents
             )}
           </Map>
         )}
@@ -102,12 +74,14 @@ const mapStateToProps = store => ({
     lng: store.map.centerMarker.lng
   },
   address: store.map.address,
-  loading: store.map.loading
+  loading: store.map.loading,
+  incidents: store.incidents.incidents
 });
 
 const mapDispatchToProps = {
   setLatLngAndAddress,
-  centerMovedAndAddress
+  centerMovedAndAddress,
+  getIncidents
 };
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
