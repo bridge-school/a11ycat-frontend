@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import { getIncidents } from "../../store/actions/incidentsActions";
+import MapContainer from "../map/MapContainer";
 
 class ViewReports extends React.Component {
   componentDidMount() {
@@ -16,6 +16,7 @@ class ViewReports extends React.Component {
             {locations.textLocation}
           </div>
         ))}
+        <MapContainer />
       </div>
     );
   }
