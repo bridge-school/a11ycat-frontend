@@ -18,7 +18,12 @@ export const renderViewReports = latLngArray => {
       };
     }
     return (
-      <Marker key={i} title={i} position={prevReport.coords} icon={icon} />
+      <Marker
+        key={i}
+        title={toString(i)}
+        position={prevReport.coords}
+        icon={icon}
+      />
     );
   });
 };
@@ -38,12 +43,7 @@ export const renderReportIncident = currentCenter => {
 };
 
 //
-export const whatToRender = (currentCenter, currentView, latLngArray) => {
-  if (currentView === "viewReports") {
-    return renderViewReports(latLngArray);
-  }
-  if (currentView === "reportIncident") {
-    return renderReportIncident(currentCenter);
-  }
-  return renderViewReports();
-};
+export const whatToRender = (currentCenter, pathname, latLngArray) =>
+  pathname === "/view-reports"
+    ? renderViewReports(latLngArray)
+    : renderReportIncident(currentCenter);
