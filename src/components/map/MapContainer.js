@@ -12,9 +12,7 @@ import { whatToRender } from "./mapRenderMethods";
 class MapContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentView: "viewReports" // hard corded for testing purporses. change to 'reportIncident' or 'viewReports'
-    };
+    this.state = {};
   }
 
   //  retrieve the current location of the user from the browser API
