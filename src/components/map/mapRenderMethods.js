@@ -8,6 +8,7 @@ import { Marker } from "google-maps-react";
 export const renderViewReports = incidents => {
   let icon;
   return incidents.map((prevReport, i) => {
+    // TO DO: check against incoming "success id" from firebase
     if (prevReport.id === "E7akiCxACui4FEEqsa3o") {
       icon = {
         url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
