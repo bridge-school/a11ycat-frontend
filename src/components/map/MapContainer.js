@@ -6,7 +6,6 @@ import {
   setLatLngAndAddress,
   centerMovedAndAddress
 } from "../../store/actions/mapActions";
-import { getIncidents } from "../../store/actions/incidentsActions";
 import { whatToRender } from "./mapRenderMethods";
 import { Loading } from "../Loading";
 
@@ -20,7 +19,6 @@ class MapContainer extends Component {
   componentDidMount() {
     const { google } = this.props;
     this.props.setLatLngAndAddress({ google });
-    this.props.getIncidents();
   }
 
   render() {
@@ -34,7 +32,7 @@ class MapContainer extends Component {
 
     return (
       <div style={style1}>
-        <DisplayAddress address={this.props.address} />
+        <DisplayAddress address={this.props.address} addressText={this.props.addressText}/>
         {this.props.loading ? (
           <Loading />
         ) : (
@@ -66,14 +64,12 @@ const mapStateToProps = store => ({
   centerMarker: store.map.centerMarker,
   address: store.map.address,
   loading: store.map.loading,
-  incidents: store.incidents.incidents,
   pathname: store.router.location.pathname
 });
 
 const mapDispatchToProps = {
   setLatLngAndAddress,
-  centerMovedAndAddress,
-  getIncidents
+  centerMovedAndAddress
 };
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;

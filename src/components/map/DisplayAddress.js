@@ -1,3 +1,3 @@
 import React from "react";
 
-export const DisplayAddress = ({ address }) => <div>{address}</div>;
+export const DisplayAddress = ({ addressText, address }) => <div>{addressText}: {address}</div>;
