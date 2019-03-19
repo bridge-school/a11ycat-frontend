@@ -6,7 +6,7 @@ import { Button } from "../Button";
 import MapContainer from "../map/MapContainer";
 import { submitForm } from "../../store/actions/incidentsActions";
 
-export class ReportIncident extends Component {
+class ReportIncident extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,23 +44,14 @@ export class ReportIncident extends Component {
   }
 
   handleSubmit(e) {
+    this.props.submitForm(this.state.selectedInput);
     e.preventDefault();
-    const formData = {
-      emojiRating: this.state.selectedInput,
-      location: {
-        lat: this.props.centerMarker.lat,
-        lng: this.props.centerMarker.lng
-      },
-      textLocation: this.props.address
-    };
-
-    this.props.submitReport({ formData });
   }
 
   render() {
     return (
       <div>
-        <form action="submit">
+        <form onSubmit={this.handleSubmit}>
           <MapContainer />
           <h3>Please state how you felt when the incident happened </h3>
           <RadioScale
@@ -78,19 +69,17 @@ export class ReportIncident extends Component {
   }
 }
 
-const mapStateToProps = store => ({
-  centerMarker: {
-    lat: store.map.centerMarker.lat,
-    lng: store.map.centerMarker.lng
-  },
-  address: store.map.address
-});
+// const mapStateToProps = store => ({
+//   lat: store.map.centerMarker.lat,
+//   lng: store.map.centerMarker.lng,
+//   address: store.map.address
+// });
 
 const mapDispatchToProps = {
   submitForm
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ReportIncident);

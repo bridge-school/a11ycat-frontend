@@ -35,9 +35,17 @@ export const getIncidents = () => async dispatch => {
   }
 };
 
-export const submitForm = ({ formData }) => async dispatch => {
+export const submitForm = selectedInput => async (dispatch, getState) => {
   try {
-    const resp = await apiPostForm({ formData });
+    const formData = {
+      emojiRating: selectedInput,
+      location: {
+        lat: getState().map.centerMarker.lat,
+        lng: getState().map.centerMarker.lng
+      },
+      textLocation: getState().map.address
+    };
+    const resp = await apiPostForm(formData);
     return dispatch(submitFormSuccess(resp)).then(() =>
       dispatch(push("/view-reports"))
     );
