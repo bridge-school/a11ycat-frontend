@@ -10,7 +10,10 @@ class ViewReports extends React.Component {
 
   render() {
     return (
-      <MapContainer incidents={this.props.incidents} addressText="Previously reported incidents surrounding"/>
+      <MapContainer
+        incidents={this.props.incidents}
+        addressText="Previously reported incidents surrounding"
+      />
     );
   }
 }

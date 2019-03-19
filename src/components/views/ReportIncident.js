@@ -52,7 +52,7 @@ class ReportIncident extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <MapContainer addressText="Location to report"/>
+          <MapContainer addressText="Location to report" />
           <h3>Please state how you felt when the incident happened </h3>
           <RadioScale
             selectedInput={this.state.selectedInput}

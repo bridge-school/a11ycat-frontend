@@ -32,7 +32,10 @@ class MapContainer extends Component {
 
     return (
       <div style={style1}>
-        <DisplayAddress address={this.props.address} addressText={this.props.addressText}/>
+        <DisplayAddress
+          address={this.props.address}
+          addressText={this.props.addressText}
+        />
         {this.props.loading ? (
           <Loading />
         ) : (
