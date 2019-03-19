@@ -6,6 +6,7 @@ import {
 } from "../api";
 
 // NORMAL ACTIONS
+// A TEST COMMENT
 
 export const mapIsLoading = bool => ({
   type: types.MAP_IS_LOADING,
