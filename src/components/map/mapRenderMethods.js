@@ -6,6 +6,7 @@ import { Marker } from "google-maps-react";
 
 // if the user goes to the view reports screen straight from home page there will not be a key for a submitted report
 export const renderViewReports = incidents => {
+  console.log(">>>>>1", incidents)
   let icon;
   return incidents.map((prevReport, i) => {
     // TO DO: check against incoming "success id" from firebase
@@ -44,7 +45,9 @@ export const renderReportIncident = currentCenter => {
 };
 
 //
-export const whatToRender = (currentCenter, pathname, latLngArray) =>
-  pathname === "/view-reports"
-    ? renderViewReports(latLngArray)
+export const whatToRender = (currentCenter, pathname, incidents) => {
+console.log(">>>>2", incidents)
+  return pathname === "/view-reports"
+    ? renderViewReports(incidents)
     : renderReportIncident(currentCenter);
+}
