@@ -115,12 +115,6 @@ class ReportIncident extends Component {
   }
 }
 
-// const mapStateToProps = store => ({
-//   lat: store.map.centerMarker.lat,
-//   lng: store.map.centerMarker.lng,
-//   address: store.map.address
-// });
-
 const mapDispatchToProps = {
   submitForm
 };
