@@ -1,7 +1,15 @@
 import React from "react";
+import Styled from "styled-components";
+
+const StyledButton = Styled.button`
+	border-radius: 0;
+	padding: 10px;
+	border: 1px solid black;
+	background-color: lightgrey;
+`;
 
 export const Button = ({ text }) => (
-  <button className="button" type="button">
+  <StyledButton className="button" type="button">
     {text}
-  </button>
+  </StyledButton>
 );
