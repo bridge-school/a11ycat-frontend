@@ -6,7 +6,7 @@ import {
   setLatLngAndAddress,
   centerMovedAndAddress
 } from "../../store/actions/mapActions";
-import { whatToRender } from "./mapRenderMethods";
+import { renderReportIncident, renderViewReports } from "./mapRenderMethods";
 import { Loading } from "../Loading";
 
 class MapContainer extends Component {
@@ -49,15 +49,11 @@ class MapContainer extends Component {
               this.props.centerMovedAndAddress({ map, google });
             }}
           >
-            {whatToRender(
-              // checks which view the user is currently on and renders the markers on the map accordingly
-              this.props.centerMarker,
-              this.props.pathname,
-              this.props.incidents
-            )}
+            {this.props.view === "report"
+              ? renderReportIncident(this.props.centerMarker)
+              : renderViewReports(this.props.incidents)}
           </Map>
         )}
-        {/* {console.log(">>>>>3", this.props.incidents)} */}
       </div>
     );
   }

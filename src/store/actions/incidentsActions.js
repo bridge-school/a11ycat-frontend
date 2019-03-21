@@ -46,10 +46,7 @@ export const submitForm = selectedInput => async (dispatch, getState) => {
       textLocation: getState().map.address
     };
     const resp = await apiPostForm(formData);
-    return (
-      dispatch(submitFormSuccess(resp)) &&
-      setTimeout(dispatch(push("/view-reports")), 1000)
-    );
+    return dispatch(submitFormSuccess(resp)) && dispatch(push("/view-reports"));
   } catch (e) {
     return dispatch(submitFormFailure(true));
   }
