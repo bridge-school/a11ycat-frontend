@@ -1,9 +1,9 @@
 import React from "react";
-import Styled from 'styled-components'
+import Styled from "styled-components";
 
 const Address = Styled.p`
   color: #333;
-`
+`;
 
 export const DisplayAddress = ({ addressText, address }) => (
   <div>
@@ -11,4 +11,4 @@ export const DisplayAddress = ({ addressText, address }) => (
       {addressText}: {address}
     </Address>
   </div>
-)
+);

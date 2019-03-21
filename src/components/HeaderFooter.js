@@ -1,6 +1,6 @@
 import React from "react";
 import Styled from "styled-components";
-import { fonts} from "../style-variables";
+import { fonts } from "../style-variables";
 import logo from "../CatCallLogo.png";
 
 const StyledHeader = Styled.header`

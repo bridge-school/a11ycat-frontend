@@ -5,6 +5,6 @@ export const black = "#333";
 export const light = "#";
 
 export const fonts = {
-  "sans": "Noto Sans, sans-serif",
-  "serif": "Inconsolata', monospace"
-}
+  sans: "Noto Sans, sans-serif",
+  serif: "Inconsolata', monospace"
+};
