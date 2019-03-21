@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { GoogleApiWrapper, Map } from "google-maps-react";
+import { GoogleApiWrapper, Map, InfoWindow } from "google-maps-react";
 import { connect } from "react-redux";
 import { DisplayAddress } from "./DisplayAddress";
 import {
@@ -12,13 +12,31 @@ import { Loading } from "../Loading";
 class MapContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showingInfoWindow: false,
+      selectedPlace: {}
+    };
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.retrievingMarkerInfo = this.retrievingMarkerInfo.bind(this);
   }
 
   //  retrieve the current location of the user from the browser API
   componentDidMount() {
     const { google } = this.props;
     this.props.setLatLngAndAddress({ google });
+  }
+
+  onMarkerClick(props, marker) {
+    const isWindowShowing = !this.state.showingInfoWindow;
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: isWindowShowing
+    });
+  }
+
+  retrievingMarkerInfo(props, marker) {
+    return this.onMarkerClick(props, marker);
   }
 
   render() {
@@ -39,24 +57,33 @@ class MapContainer extends Component {
         {this.props.loading ? (
           <Loading />
         ) : (
-          <Map
-            zoom={15}
-            google={this.props.google}
-            initialCenter={this.props.currentLocation}
-            center={this.props.centerMarker}
-            onDragend={(mapProps, map) => {
-              const { google } = this.props;
-              this.props.centerMovedAndAddress({ map, google });
-            }}
-          >
-            {whatToRender(
-              // checks which view the user is currently on and renders the markers on the map accordingly
-              this.props.centerMarker,
-              this.props.pathname,
-              this.props.incidents
-            )}
-          </Map>
-        )}
+            <Map
+              zoom={15}
+              google={this.props.google}
+              initialCenter={this.props.currentLocation}
+              center={this.props.centerMarker}
+              onDragend={(mapProps, map) => {
+                const { google } = this.props;
+                this.props.centerMovedAndAddress({ map, google });
+              }}
+            >
+              {whatToRender(
+                // checks which view the user is currently on and renders the markers on the map accordingly
+                this.props.centerMarker,
+                this.props.pathname,
+                this.props.incidents,
+                this.retrievingMarkerInfo
+              )}
+              <InfoWindow
+                visible={this.state.showingInfoWindow}
+                marker={this.state.activeMarker}
+              >
+                <div>
+                  <h1>{this.state.selectedPlace.name}</h1>
+                </div>
+              </InfoWindow>
+            </Map>
+          )}
       </div>
     );
   }

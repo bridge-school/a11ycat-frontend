@@ -5,9 +5,10 @@ import { Marker } from "google-maps-react";
 // the icon of the incident the user just submitted will be displayed in a different color
 
 // if the user goes to the view reports screen straight from home page there will not be a key for a submitted report
-export const renderViewReports = incidents => {
+export const renderViewReports = (incidents, retrievingMarkerInfo) => {
   let icon;
   return incidents.map((prevReport, i) => {
+    console.log("prev", prevReport);
     // TO DO: check against incoming "success id" from firebase
     if (prevReport.id === "E7akiCxACui4FEEqsa3o") {
       icon = {
@@ -23,7 +24,9 @@ export const renderViewReports = incidents => {
         key={i}
         title={toString(i)}
         position={prevReport.location}
+        onClick={retrievingMarkerInfo}
         icon={icon}
+        name={prevReport.textLocation}
       />
     );
   });
@@ -44,7 +47,12 @@ export const renderReportIncident = currentCenter => {
 };
 
 //
-export const whatToRender = (currentCenter, pathname, latLngArray) =>
+export const whatToRender = (
+  currentCenter,
+  pathname,
+  latLngArray,
+  retrievingMarkerInfo
+) =>
   pathname === "/view-reports"
-    ? renderViewReports(latLngArray)
+    ? renderViewReports(latLngArray, retrievingMarkerInfo)
     : renderReportIncident(currentCenter);
