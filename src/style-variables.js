@@ -4,6 +4,7 @@ export const black = "#333";
 
 export const light = "#";
 
-export const serif = `'Inconsolata', monospace'`;
-
-export const sans = `'Noto Sans', sans-serif`;
+export const fonts = {
+  "sans": "Noto Sans, sans-serif",
+  "serif": "Inconsolata', monospace"
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import Styled from "styled-components";
-// import { serif } from "../style-variables";
+import { fonts} from "../style-variables";
 import logo from "../CatCallLogo.png";
 
 const StyledHeader = Styled.header`
@@ -12,9 +12,11 @@ const StyledHeader = Styled.header`
 	align-items: center;
 	justify-content: space-between;
 	padding: 10px 20px;
+	font-family: ${fonts.serif}
 	& a{
 		color: inherit;
 		font-size: 15px;
+		font-family: ${fonts.sans}
 	}
 
 	& a: visited{

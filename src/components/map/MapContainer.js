@@ -23,11 +23,8 @@ class MapContainer extends Component {
 
   render() {
     const style1 = {
-      width: "90%",
-      height: "400px",
-      margin: "auto",
-      marginTop: "20px",
-      position: "relative"
+      width: "100%",
+      height: "100%",
     };
 
     return (
