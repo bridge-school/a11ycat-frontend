@@ -57,7 +57,7 @@ class MapContainer extends Component {
             )}
           </Map>
         )}
-        {console.log(">>>>>3", this.props.incidents)}
+        {/* {console.log(">>>>>3", this.props.incidents)} */}
       </div>
     );
   }
