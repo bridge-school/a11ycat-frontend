@@ -1,4 +1,4 @@
-export const bgpink = "#f35f5f";
+export const pink = "#f35f5f";
 
 export const black = "#333";
 

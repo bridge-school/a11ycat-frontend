@@ -1,10 +1,26 @@
 import React from "react";
 import Styled from "styled-components";
+// import { serif } from "../style-variables";
 import logo from "../CatCallLogo.png";
 
 const StyledHeader = Styled.header`
 	width: 100%;
-	background-color: darkgrey;
+	background-color: #2f2c2c;
+	color: white;
+	font-size: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+	& a{
+		color: inherit;
+		font-size: 15px;
+	}
+
+	& a: visited{
+		color: white;
+	}
+
 `;
 
 export const Header = () => (

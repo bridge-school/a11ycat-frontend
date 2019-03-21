@@ -2,6 +2,10 @@ CATCALL.IO STYLE GUIDE
 
 Colors:
 
+PINK : #f35f5f;
+
+BLACK : #333
+
 Fonts:
 
 # FROM ALINA
